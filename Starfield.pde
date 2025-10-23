@@ -42,7 +42,7 @@ class heHeheHaw extends Star {
   void show() {
     float myX = map(x / depth, 0, 1, 0, width);
     float myY = map(y / depth, 0, 1, 0, height);
-    float size = map(depth, 0, width, 20, 0); // maybe larger
+    float size = map(depth, 0, width, 100, 0); // maybe larger
 
     noStroke();
     fill(255, 171, 24); // bluish tint
