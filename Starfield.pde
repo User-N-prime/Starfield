@@ -100,6 +100,7 @@ void setup() {
 }
 
 void draw() {
+  background(0);
   if (hyperDrive) {
     if (a_One) {
       hyperSpeed = constrain(hyperSpeed + 0.4, 10, 50);
