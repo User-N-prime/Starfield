@@ -1,4 +1,5 @@
-boolean hyperDrive = false;
+boolean hyperDrive;
+hyperDrive = false;
 boolean a_One = false;
 float hyperSpeed = 1;
 float backCol = 0;
@@ -17,6 +18,7 @@ class Star {
   }
 
   void move() {
+
     depth -= hyperSpeed * speed;
     if (depth < 1) {
       depth = width;
@@ -31,9 +33,8 @@ class Star {
     float size = map(depth, 0, width, 15, 0);
 
     if (hyperSpeed > 25) {
-      // 171, 251, 254
       stroke(85 * (float)Math.random() + 171, 255, 255, (hyperSpeed - 25) * 10);
-      strokeWeight(max(0, size - 3));
+      strokeWeight(max(0.1, size - 5));
       line(myX - x, myY - y, myX, myY);
     }
     if (hyperSpeed < 35) {
@@ -127,7 +128,7 @@ void draw() {
   }
   else {
     backCol = max(backCol - 5, hyperSpeed - 10);
-    fill(backCol, 150);
+    fill(backCol, backCol, backCol, 255);
     rect(0, 0, width, height);
   }
   translate(width / 2, height / 2);
