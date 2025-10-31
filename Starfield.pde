@@ -1,3 +1,4 @@
+// all for faster speed effects
 boolean hyperDrive;
 hyperDrive = false;
 boolean a_One = false;
@@ -12,14 +13,16 @@ class Star {
   Star() {
     x = (float)Math.random() * 2 * width - width;
     y = (float)Math.random() * 2 * height - height;
+    // calculates "how far" a star is
     depth = (float)(Math.random() * (width - 1) + 1);
     speed = (float)(10 * Math.random() + 5);
     col = 255;
   }
 
   void move() {
-
+    // applies depth every frame
     depth -= hyperSpeed * speed;
+    // resets star if gets too close (off-screen)
     if (depth < 1) {
       depth = width;
       x = (float)Math.random() * 2 * width - width;
@@ -28,17 +31,21 @@ class Star {
   }
 
   void show() {
+    // map functions applies effect of star getting closer
     float myX = map(x / depth, 0, 1, 0, width);
     float myY = map(y / depth, 0, 1, 0, height);
     float size = map(depth, 0, width, 15, 0);
 
+    // makes lines for a_One fade in at fast speed
     if (hyperSpeed > 25) {
       stroke(85 * (float)Math.random() + 171, 255, 255, (hyperSpeed - 25) * 10);
       strokeWeight(max(0.1, size - 5));
       line(myX - x, myY - y, myX, myY);
     }
+    // makes dots fade out at fast speed
     if (hyperSpeed < 35) {
       noStroke();
+      // makes colors shift more toward white/blue at fast speed
       if (hyperSpeed > 25) {
         fill(255, 255 * ((35 - hyperSpeed) / 10));
       }
@@ -50,6 +57,7 @@ class Star {
   }
 }
 
+// extention of star class; makes star yellow-orange, move slower
 class heHeheHaw extends Star {
   heHeheHaw() {
     x = width / 2;
@@ -78,6 +86,7 @@ class heHeheHaw extends Star {
   }
 }
 
+// triggers for hyperspeeds
 void keyPressed() {
   if (key == ' ')
     hyperDrive = !hyperDrive;
@@ -89,6 +98,7 @@ void keyPressed() {
     a_One = false;
 }
 
+// declare + initialize 500 stars
 Star[] stars = new Star[500];
 
 void setup() {
@@ -102,9 +112,11 @@ void setup() {
 
 void draw() {
   background(0);
+  // makes speed quicker when hyperspeeds triggered
   if (hyperDrive) {
     if (a_One) {
       hyperSpeed = constrain(hyperSpeed + 0.4, 10, 50);
+      // changes background color to the blue/black gradient at fast speeds
       backCol = min(backCol + 1, 150);
       for (int i = 50; i >= 20; i--) {
         float r = constrain(backCol, 0, i * 4 / 50);
